@@ -68,7 +68,7 @@ section h2{text-align:center;margin-bottom:20px}
 
 <header>
 <h1>Elite Salon</h1>
-<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<div class="menu-toggle" onclick="toggleMenu()" id="menuIcon">☰</div>
 <nav id="navMenu">
 <a href="#">Home</a>
 <a href="#about">About</a>
@@ -109,7 +109,7 @@ section h2{text-align:center;margin-bottom:20px}
 </section>
 
 <section id="pricing">
-<h2>Pricing</h2>
+<h2>Pricing (INR ₹)</h2>
 <div class="grid">
 <div class="card"><div class="card-content">Haircut - ₹300</div></div>
 <div class="card"><div class="card-content">Beard - ₹200</div></div>
@@ -118,11 +118,11 @@ section h2{text-align:center;margin-bottom:20px}
 </section>
 
 <section id="membership">
-<h2>Membership</h2>
+<h2>Membership Plans (INR ₹)</h2>
 <div class="grid">
-<div class="card"><div class="card-content">Silver ₹999/year</div></div>
-<div class="card"><div class="card-content">Gold ₹1999/year</div></div>
-<div class="card"><div class="card-content">Platinum ₹2999/year</div></div>
+<div class="card"><div class="card-content">Silver Plan - ₹999/year</div></div>
+<div class="card"><div class="card-content">Gold Plan - ₹1999/year</div></div>
+<div class="card"><div class="card-content">Platinum Plan - ₹2999/year</div></div>
 </div>
 </section>
 
@@ -154,8 +154,27 @@ let selectedService='';
 let currentUser=localStorage.getItem('salonUser');
 
 function toggleMenu(){
-  document.getElementById('navMenu').classList.toggle('active');
+  const nav = document.getElementById('navMenu');
+  const icon = document.getElementById('menuIcon');
+  nav.classList.toggle('active');
+
+  // CHANGE ICON ☰ <-> ✖
+  if(nav.classList.contains('active')){
+    icon.innerHTML = '✖';
+  } else {
+    icon.innerHTML = '☰';
+  }
 }
+  const nav = document.getElementById('navMenu');
+  nav.classList.toggle('active');
+}
+
+// AUTO CLOSE MENU WHEN CLICKING LINK (FIX)
+document.querySelectorAll('#navMenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navMenu').classList.remove('active');
+  });
+});
 
 function openLogin(){document.getElementById('loginModal').style.display='flex'}
 
