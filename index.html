@@ -155,31 +155,35 @@ document.addEventListener('DOMContentLoaded', function(){
 let selectedService='';
 let currentUser=localStorage.getItem('salonUser');
 
+// MENU TOGGLE
 window.toggleMenu = function(){
   const nav = document.getElementById('navMenu');
   const icon = document.getElementById('menuIcon');
 
   nav.classList.toggle('active');
 
-  if(nav.classList.contains('active')){
-    icon.innerHTML = '✖';
-  } else {
-    icon.innerHTML = '☰';
-  }
+  icon.innerHTML = nav.classList.contains('active') ? '✖' : '☰';
 }
 
-// AUTO CLOSE MENU WHEN CLICKING LINK
+// AUTO CLOSE MENU LINKS
 const navLinks = document.querySelectorAll('#navMenu a');
 navLinks.forEach(link => {
   link.addEventListener('click', () => {
-    const nav = document.getElementById('navMenu');
-    const icon = document.getElementById('menuIcon');
-
-    nav.classList.remove('active');
-    icon.innerHTML = '☰';
+    document.getElementById('navMenu').classList.remove('active');
+    document.getElementById('menuIcon').innerHTML = '☰';
   });
 });
 
+// CLOSE MENU ON LOGIN CLICK
+const loginBtn = document.querySelector('.login-btn');
+if(loginBtn){
+  loginBtn.addEventListener('click', () => {
+    document.getElementById('navMenu').classList.remove('active');
+    document.getElementById('menuIcon').innerHTML = '☰';
+  });
+}
+
+// LOGIN
 window.openLogin = function(){
   document.getElementById('loginModal').style.display='flex';
 }
@@ -193,6 +197,7 @@ window.loginUser = function(){
   alert('Logged in as '+name);
 }
 
+// CHAT
 window.toggleChat = function(){
   if(!currentUser){alert('Please login first');return;}
   let box=document.getElementById('chatBox');
