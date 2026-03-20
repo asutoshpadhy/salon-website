@@ -56,7 +56,39 @@ section h2{text-align:center;margin-bottom:25px}
 
 /* CHAT */
 .chat-box{position:fixed;bottom:20px;right:20px;width:320px;background:#fff;border-radius:10px;display:none;border:1px solid #ddd;z-index:1500}
-.chat-box button{margin:4px;padding:6px 10px;border:none;background:#eee;cursor:pointer;border-radius:5px}
+.chat-box button{
+ margin:4px;
+ padding:6px 10px;
+ border:1px solid #c8a97e;
+ background:#fff;
+ color:#c8a97e;
+ cursor:pointer;
+ border-radius:5px;
+ transition:.3s
+}
+
+/* ACTIVE / SELECTED BUTTON */
+.chat-box button.active{
+ background:#c8a97e;
+ color:#fff;
+}
+
+/* HOVER REVERSE EFFECT */
+.chat-box button:hover{
+ background:#c8a97e;
+ color:#fff;
+}
+
+/* IF ACTIVE THEN HOVER REVERSE BACK */
+.chat-box button.active:hover{
+ background:#fff;
+ color:#c8a97e;
+}
+.chat-box button:hover{
+ background:#c8a97e;
+ color:#fff;
+}
+.chat-box button:hover{background:#c8a97e;color:#fff}
 
 /* GALLERY */
 .gallery img{width:100%;border-radius:10px;transition:.3s}
