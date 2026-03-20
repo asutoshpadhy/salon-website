@@ -150,10 +150,12 @@ section h2{text-align:center;margin-bottom:20px}
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function(){
+
 let selectedService='';
 let currentUser=localStorage.getItem('salonUser');
 
-function toggleMenu(){
+window.toggleMenu = function(){
   const nav = document.getElementById('navMenu');
   const icon = document.getElementById('menuIcon');
 
@@ -178,11 +180,11 @@ navLinks.forEach(link => {
   });
 });
 
-function openLogin(){
+window.openLogin = function(){
   document.getElementById('loginModal').style.display='flex';
 }
 
-function loginUser(){
+window.loginUser = function(){
   let name=document.getElementById('username').value;
   if(!name)return alert('Enter name');
   localStorage.setItem('salonUser',name);
@@ -191,19 +193,19 @@ function loginUser(){
   alert('Logged in as '+name);
 }
 
-function toggleChat(){
+window.toggleChat = function(){
   if(!currentUser){alert('Please login first');return;}
   let box=document.getElementById('chatBox');
   box.style.display=box.style.display==='flex'?'none':'flex';
 }
 
-function selectService(service){
+window.selectService = function(service){
   selectedService=service;
   let body=document.getElementById('chatBody');
   body.innerHTML+=`<br>You: ${service}<br>Select date`;
 }
 
-function confirmBooking(){
+window.confirmBooking = function(){
   let date=document.getElementById('dateInput').value;
   let body=document.getElementById('chatBody');
 
@@ -214,6 +216,8 @@ function confirmBooking(){
 
   body.innerHTML+=`<br>✅ Booking confirmed for ${currentUser} (${selectedService} on ${date})`;
 }
+
+});
 </script>
 
 </body>
