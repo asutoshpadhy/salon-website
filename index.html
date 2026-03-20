@@ -156,54 +156,63 @@ let currentUser=localStorage.getItem('salonUser');
 function toggleMenu(){
   const nav = document.getElementById('navMenu');
   const icon = document.getElementById('menuIcon');
+
   nav.classList.toggle('active');
 
-  // CHANGE ICON ☰ <-> ✖
   if(nav.classList.contains('active')){
     icon.innerHTML = '✖';
   } else {
     icon.innerHTML = '☰';
   }
 }
-  const nav = document.getElementById('navMenu');
-  nav.classList.toggle('active');
-}
 
-// AUTO CLOSE MENU WHEN CLICKING LINK (FIX)
-document.querySelectorAll('#navMenu a').forEach(link => {
+// AUTO CLOSE MENU WHEN CLICKING LINK
+const navLinks = document.querySelectorAll('#navMenu a');
+navLinks.forEach(link => {
   link.addEventListener('click', () => {
-    document.getElementById('navMenu').classList.remove('active');
+    const nav = document.getElementById('navMenu');
+    const icon = document.getElementById('menuIcon');
+
+    nav.classList.remove('active');
+    icon.innerHTML = '☰';
   });
 });
 
-function openLogin(){document.getElementById('loginModal').style.display='flex'}
+function openLogin(){
+  document.getElementById('loginModal').style.display='flex';
+}
 
 function loginUser(){
-let name=document.getElementById('username').value;
-if(!name)return alert('Enter name');
-localStorage.setItem('salonUser',name);
-currentUser=name;
-document.getElementById('loginModal').style.display='none';
-alert('Logged in as '+name);
+  let name=document.getElementById('username').value;
+  if(!name)return alert('Enter name');
+  localStorage.setItem('salonUser',name);
+  currentUser=name;
+  document.getElementById('loginModal').style.display='none';
+  alert('Logged in as '+name);
 }
 
 function toggleChat(){
-if(!currentUser){alert('Please login first');return;}
-let box=document.getElementById('chatBox');
-box.style.display=box.style.display==='flex'?'none':'flex';
+  if(!currentUser){alert('Please login first');return;}
+  let box=document.getElementById('chatBox');
+  box.style.display=box.style.display==='flex'?'none':'flex';
 }
 
 function selectService(service){
-selectedService=service;
-let body=document.getElementById('chatBody');
-body.innerHTML+=`<br>You: ${service}<br>Select date`;
+  selectedService=service;
+  let body=document.getElementById('chatBody');
+  body.innerHTML+=`<br>You: ${service}<br>Select date`;
 }
 
 function confirmBooking(){
-let date=document.getElementById('dateInput').value;
-let body=document.getElementById('chatBody');
-if(!selectedService||!date){body.innerHTML+='<br>Please complete details';return;}
-body.innerHTML+=`<br>✅ Booking confirmed for ${currentUser} (${selectedService} on ${date})`;
+  let date=document.getElementById('dateInput').value;
+  let body=document.getElementById('chatBody');
+
+  if(!selectedService||!date){
+    body.innerHTML+='<br>Please complete details';
+    return;
+  }
+
+  body.innerHTML+=`<br>✅ Booking confirmed for ${currentUser} (${selectedService} on ${date})`;
 }
 </script>
 
