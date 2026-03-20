@@ -225,6 +225,29 @@ window.confirmBooking = function(){
   }
 
   body.innerHTML+=`<br>✅ Booking confirmed for ${currentUser} (${selectedService} on ${date})`;
+
+  // SUGGEST NEXT ACTION
+  body.innerHTML+=`<br><br><b>Would you like to book another service?</b><br>`;
+  body.innerHTML+=`
+    <button onclick="startNewBooking()">Yes, New Booking</button>
+    <button onclick="closeChat()">No, Thanks</button>
+  `;
+}
+
+// START NEW BOOKING FLOW
+window.startNewBooking = function(){
+  selectedService='';
+  let body=document.getElementById('chatBody');
+  body.innerHTML=`Select another service:<br>
+    <button onclick="selectService('Haircut')">Haircut</button>
+    <button onclick="selectService('Facial')">Facial</button>
+  `;
+  document.getElementById('dateInput').value='';
+}
+
+// CLOSE CHAT
+window.closeChat = function(){
+  document.getElementById('chatBox').style.display='none';
 }
 
 });
