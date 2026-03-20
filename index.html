@@ -391,7 +391,7 @@ function chatSuggest(){
  for(let cat in services[gender]){
   services[gender][cat].forEach(s=>{
    let btn=document.createElement('button');
-   btn.innerText=s;
+   btn.innerText=s.name;
    btn.className='btn';
    btn.onclick=()=>bookService(s);
    chat.appendChild(btn);
