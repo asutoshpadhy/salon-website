@@ -51,7 +51,8 @@ section h2{text-align:center;margin-bottom:25px}
 .service-box{background:#fff;padding:20px;width:420px;max-height:80vh;overflow:auto;border-radius:12px;position:relative}
 .close-btn{position:absolute;top:10px;right:15px;cursor:pointer}
 
-.service-item{display:flex;gap:10px;margin-bottom:10px;align-items:center}
+.service-item{display:flex;gap:10px;margin-bottom:15px;align-items:center;justify-content:space-between}
+.service-item div{flex:1}
 .service-item img{width:60px;height:60px;border-radius:8px;object-fit:cover}
 
 /* CHAT */
@@ -167,7 +168,10 @@ section h2{text-align:center;margin-bottom:25px}
 </div>
 
 <div class="chat-box" id="chatBox">
-<div style="background:#c8a97e;color:#fff;padding:10px">Booking</div>
+<div style="background:#c8a97e;color:#fff;padding:10px;display:flex;justify-content:space-between;align-items:center">
+<span>Booking</span>
+<span style="cursor:pointer;font-weight:bold" onclick="document.getElementById('chatBox').style.display='none'">✖</span>
+</div>
 <div id="chatBody" style="padding:10px;height:180px;overflow:auto"></div>
 <div style="display:flex">
 <input type="date" id="dateInput" style="flex:1;padding:8px">
@@ -222,8 +226,27 @@ let selectedService='';
 let bookingDone=false;
 
 const services={
- Men:{"Hair Services":["Haircut","Hair Wash","Hair Styling"],"Grooming":["Beard Trim","Clean Shave"]},
- Women:{"Hair Services":["Haircut","Blow Dry"],"Beauty":["Facial","Cleanup"]}
+ Men:{
+  "Hair Services":[
+    {name:"Haircut",price:"₹300",duration:"30 min",desc:"Precision haircut tailored to your style."},
+    {name:"Hair Wash",price:"₹150",duration:"15 min",desc:"Deep cleansing with premium shampoo."},
+    {name:"Hair Styling",price:"₹250",duration:"25 min",desc:"Stylish finish for any occasion."}
+  ],
+  "Grooming":[
+    {name:"Beard Trim",price:"₹200",duration:"20 min",desc:"Sharp beard shaping & detailing."},
+    {name:"Clean Shave",price:"₹180",duration:"20 min",desc:"Smooth shave with skin care."}
+  ]
+ },
+ Women:{
+  "Hair Services":[
+    {name:"Haircut",price:"₹500",duration:"45 min",desc:"Professional haircut with styling."},
+    {name:"Blow Dry",price:"₹400",duration:"30 min",desc:"Smooth blow dry for perfect finish."}
+  ],
+  "Beauty":[
+    {name:"Facial",price:"₹800",duration:"60 min",desc:"Relaxing facial for glowing skin."},
+    {name:"Cleanup",price:"₹600",duration:"40 min",desc:"Deep skin cleansing treatment."}
+  ]
+ }
 };
 
 const categoryImages={
@@ -270,16 +293,24 @@ function openCategory(cat){
  services[gender][cat].forEach(s=>{
   let div=document.createElement('div');
   div.className='service-item';
-  div.innerHTML=`<img src="${categoryImages[cat]}"><div>${s}</div>`;
+
+  div.innerHTML=`
+    <img src="${categoryImages[cat]}">
+    <div>
+      <b>${s.name}</b><br>
+      <small>${s.desc}</small><br>
+      <span><b>${s.price}</b> • ${s.duration}</span>
+    </div>
+  `;
 
   let btn=document.createElement('button');
   btn.innerText='Book';
   btn.className='btn';
-  btn.onclick=()=>bookService(s);
+  btn.onclick=()=>bookService(s.name);
 
   div.appendChild(btn);
   list.appendChild(div);
- });
+});
 
  document.getElementById('serviceModal').style.display='flex';
 }
@@ -369,7 +400,7 @@ function chatSuggest(){
 }
 </script>
 
-<div onclick="toggleChat()" style="position:fixed;bottom:20px;left:20px;background:#c8a97e;color:#fff;padding:12px 16px;border-radius:30px;cursor:pointer">💬 Book</div>
+<div onclick="toggleChat()" style="position:fixed;bottom:20px;right:20px;background:#c8a97e;color:#fff;padding:12px 16px;border-radius:30px;cursor:pointer">💬 Book</div>
 
 </body>
 </html>
