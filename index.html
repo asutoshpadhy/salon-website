@@ -6,33 +6,48 @@
 <title>Elite Unisex Salon</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth}
 body{background:#0f0f0f;color:#fff}
-header{display:flex;justify-content:space-between;align-items:center;padding:20px 50px;background:#111;position:sticky;top:0}
+
+/* NAVBAR */
+header{display:flex;justify-content:space-between;align-items:center;padding:15px 40px;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);position:sticky;top:0;z-index:1000}
 header h1{color:#f5b041}
-nav a{margin:0 12px;color:#fff;text-decoration:none}
+nav a{margin:0 10px;color:#fff;text-decoration:none;font-size:14px}
 nav a:hover{color:#f5b041}
+.login-btn{background:#f5b041;color:#000;padding:6px 12px;border:none;border-radius:5px;cursor:pointer}
 
-.login-btn{background:#f5b041;color:#000;padding:8px 15px;border:none;cursor:pointer}
+/* HERO */
+.hero{height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9');background-size:cover}
+.hero h2{font-size:3rem}
+.hero button{margin-top:20px;padding:12px 25px;border:none;background:#f5b041;color:#000;font-weight:bold;border-radius:30px;cursor:pointer;transition:.3s}
+.hero button:hover{transform:scale(1.05)}
 
-.hero{height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9');background-size:cover}
+section{padding:60px 40px}
+section h2{text-align:center;margin-bottom:20px}
 
-section{padding:60px 50px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.card{background:#1a1a1a;border-radius:10px;overflow:hidden}
-.card img{width:100%;height:200px;object-fit:cover}
-.card-content{padding:15px}
+.card{background:#1a1a1a;border-radius:12px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.5);transition:.3s}
+.card img{width:100%;height:200px;object-fit:cover;transition:.4s}
+.card:hover img{transform:scale(1.1)}
+.card-content{padding:15px;text-align:center}
+.card:hover{transform:translateY(-8px)}
 
-.gallery img{width:100%;height:250px;object-fit:cover;border-radius:10px}
+.gallery img{width:100%;height:250px;object-fit:cover;border-radius:10px;transition:.3s}
+.gallery img:hover{transform:scale(1.05)}
 
+/* CTA BUTTON */
+.cta{position:fixed;bottom:20px;left:20px;background:#f5b041;color:#000;padding:12px 20px;border-radius:30px;cursor:pointer;font-weight:bold}
+
+/* CHAT */
 .chat-btn{position:fixed;bottom:20px;right:20px;background:#f5b041;color:#000;padding:15px;border-radius:50%;cursor:pointer}
 .chat-box{position:fixed;bottom:80px;right:20px;width:300px;background:#1a1a1a;border-radius:10px;display:none;flex-direction:column}
 .chat-header{background:#f5b041;color:#000;padding:10px}
-.chat-body{padding:10px;height:200px;overflow:auto}
+.chat-body{padding:10px;height:200px;overflow:auto;font-size:14px}
 .chat-input{display:flex}
 .chat-input input{flex:1;padding:8px;border:none}
 .chat-input button{background:#f5b041;border:none;padding:8px}
 
+/* LOGIN */
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);display:none;justify-content:center;align-items:center}
 .modal-box{background:#1a1a1a;padding:20px;border-radius:10px;width:300px}
 .modal-box input{width:100%;padding:10px;margin:10px 0}
@@ -56,11 +71,12 @@ section{padding:60px 50px}
 
 <section class="hero">
 <h2>Look Good. Feel Better.</h2>
+<button onclick="toggleChat()">Book Now</button>
 </section>
 
 <section id="about">
 <h2>About Us</h2>
-<p>We are a premium unisex salon offering modern styling, grooming, and skincare services with expert professionals.</p>
+<p style="text-align:center;max-width:600px;margin:auto">Premium unisex salon delivering modern styling, grooming & skincare with expert professionals.</p>
 </section>
 
 <section id="services">
@@ -99,11 +115,16 @@ section{padding:60px 50px}
 </div>
 </section>
 
+<div class="cta" onclick="toggleChat()">Book Appointment</div>
+
 <div class="chat-btn" onclick="toggleChat()">💬</div>
 
 <div class="chat-box" id="chatBox">
 <div class="chat-header">Book Appointment</div>
-<div class="chat-body" id="chatBody">Select service:<br><button onclick="selectService('Haircut')">Haircut</button><button onclick="selectService('Facial')">Facial</button></div>
+<div class="chat-body" id="chatBody">Select service:<br>
+<button onclick="selectService('Haircut')">Haircut</button>
+<button onclick="selectService('Facial')">Facial</button>
+</div>
 <div class="chat-input">
 <input type="date" id="dateInput">
 <button onclick="confirmBooking()">OK</button>
