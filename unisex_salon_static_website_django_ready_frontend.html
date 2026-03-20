@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Unisex Salon</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#0f0f0f;color:#fff}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 50px;background:#111}
+header h1{color:#f5b041}
+nav a{margin:0 15px;color:#fff;text-decoration:none}
+nav a:hover{color:#f5b041}
+
+.login-btn{background:#f5b041;color:#000;padding:8px 15px;border:none;cursor:pointer}
+
+.hero{height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9');background-size:cover}
+
+section{padding:60px 50px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:#1a1a1a;border-radius:10px;overflow:hidden}
+.card img{width:100%;height:200px;object-fit:cover}
+.card-content{padding:15px}
+
+.chat-btn{position:fixed;bottom:20px;right:20px;background:#f5b041;color:#000;padding:15px;border-radius:50%;cursor:pointer}
+.chat-box{position:fixed;bottom:80px;right:20px;width:300px;background:#1a1a1a;border-radius:10px;display:none;flex-direction:column}
+.chat-header{background:#f5b041;color:#000;padding:10px}
+.chat-body{padding:10px;height:200px;overflow:auto}
+.chat-input{display:flex}
+.chat-input input{flex:1;padding:8px;border:none}
+.chat-input button{background:#f5b041;border:none;padding:8px}
+
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);display:none;justify-content:center;align-items:center}
+.modal-box{background:#1a1a1a;padding:20px;border-radius:10px;width:300px}
+.modal-box input{width:100%;padding:10px;margin:10px 0}
+
+</style>
+</head>
+<body>
+
+<header>
+<h1>Elite Salon</h1>
+<nav>
+<a href="#">Home</a>
+<a href="#services">Services</a>
+<button class="login-btn" onclick="openLogin()">Login</button>
+</nav>
+</header>
+
+<section class="hero">
+<h2>Look Good. Feel Better.</h2>
+</section>
+
+<div class="chat-btn" onclick="toggleChat()">💬</div>
+
+<div class="chat-box" id="chatBox">
+<div class="chat-header">Book Appointment</div>
+<div class="chat-body" id="chatBody">Select service:<br><button onclick="selectService('Haircut')">Haircut</button><button onclick="selectService('Facial')">Facial</button></div>
+<div class="chat-input">
+<input type="date" id="dateInput">
+<button onclick="confirmBooking()">OK</button>
+</div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal" id="loginModal">
+<div class="modal-box">
+<h3>Login</h3>
+<input type="text" id="username" placeholder="Enter Name">
+<button onclick="loginUser()">Login</button>
+</div>
+</div>
+
+<script>
+let selectedService='';
+let currentUser=localStorage.getItem('salonUser');
+
+function openLogin(){document.getElementById('loginModal').style.display='flex'}
+
+function loginUser(){
+let name=document.getElementById('username').value;
+if(!name)return alert('Enter name');
+localStorage.setItem('salonUser',name);
+currentUser=name;
+document.getElementById('loginModal').style.display='none';
+alert('Logged in as '+name);
+}
+
+function toggleChat(){
+if(!currentUser){alert('Please login first');return;}
+let box=document.getElementById('chatBox');
+box.style.display=box.style.display==='flex'?'none':'flex';
+}
+
+function selectService(service){
+selectedService=service;
+let body=document.getElementById('chatBody');
+body.innerHTML+=`<br>You: ${service}<br>Select date`;
+}
+
+function confirmBooking(){
+let date=document.getElementById('dateInput').value;
+let body=document.getElementById('chatBody');
+
+if(!selectedService||!date){
+body.innerHTML+='<br>Please complete details';return;
+}
+
+body.innerHTML+=`<br>✅ Booking confirmed for ${currentUser} (${selectedService} on ${date})`;
+}
+</script>
+
+</body>
+</html>
