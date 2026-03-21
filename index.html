@@ -9,122 +9,63 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
 body{background:#f4efe6;color:#2b2b2b}
 
-header{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:#fffaf3;position:fixed;top:0;width:100%;border-bottom:1px solid #e6dccf;transition:transform .4s ease;z-index:1000}
-.menu-toggle{display:none;font-size:26px;cursor:pointer}
-nav{display:flex;align-items:center}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 30px;background:#fffaf3;position:fixed;top:0;width:100%;border-bottom:1px solid #e6dccf;z-index:1000}
+nav{display:flex;gap:20px}
+nav a{text-decoration:none;color:#2b2b2b;font-weight:500}
 
-/* MOBILE NAV */
-@media(max-width:768px){
-  .menu-toggle{display:block}
-  nav{position:absolute;top:70px;left:0;width:100%;background:#fffaf3;flex-direction:column;display:none;border-bottom:1px solid #e6dccf}
-  nav.active{display:flex}
-  nav a{padding:15px;border-top:1px solid #eee;width:100%;text-align:center;margin:0}
-}
-header.hide{transform:translateY(-100%)}
-nav a{margin-left:20px;text-decoration:none;color:#2b2b2b}
-
-section{padding:100px 30px 60px;opacity:0;transform:translateY(40px);transition:all .6s ease}
-section.show{opacity:1;transform:translateY(0)}
+section{padding:100px 30px 60px}
 section h2{text-align:center;margin-bottom:25px}
 
-/* HERO */
-.carousel{position:relative;height:70vh;overflow:hidden;border-radius:12px}
+.carousel{position:relative;height:70vh;overflow:hidden}
 .slide{position:absolute;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:1s}
 .slide.active{opacity:1}
 
-/* CARDS */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#fff;border-radius:12px;border:1px solid #e6dccf;text-align:center;cursor:pointer;overflow:hidden;transition:.3s}
-.card:hover{transform:translateY(-8px);box-shadow:0 10px 20px rgba(0,0,0,0.1)}
-.card img{width:100%;height:140px;object-fit:cover}
-.card p{padding:15px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:#fff;border-radius:16px;border:1px solid #e6dccf;overflow:hidden}
+.card img{width:100%;height:200px;object-fit:cover}
+.card-content{padding:12px}
 
-/* BUTTON STYLE */
-.btn{
- background:#c8a97e;
- color:#fff;
- border:none;
- padding:8px 14px;
- border-radius:20px;
- cursor:pointer;
- transition:.3s
-}
-.btn:hover{background:#b89666;transform:scale(1.05)}
+#gallery img{width:100%;height:280px;object-fit:cover;border-radius:12px}
 
-.gender-select{display:flex;justify-content:center;gap:20px;margin-bottom:20px}
-.gender-btn{padding:10px 20px;border:1px solid #c8a97e;background:#fff;cursor:pointer;border-radius:20px;transition:.3s}
-.gender-btn:hover{background:#c8a97e;color:#fff}
-.gender-btn.active{background:#c8a97e;color:#fff}
+.btn{background:#c8a97e;color:#fff;border:none;padding:8px 14px;border-radius:20px;cursor:pointer}
 
-/* MODAL */
-.service-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center}
-.service-box{background:#fff;padding:20px;width:420px;max-height:80vh;overflow:auto;border-radius:12px;position:relative}
-.close-btn{position:absolute;top:10px;right:15px;cursor:pointer}
+/* REVIEWS */
+.review-card{background:#fff;padding:20px;border-radius:12px;border:1px solid #e6dccf;text-align:center}
+.stars{color:#c8a97e;font-size:18px;margin:10px 0}
 
-.service-item{display:flex;gap:10px;margin-bottom:15px;align-items:center;justify-content:space-between}
-.service-item div{flex:1}
-.service-item img{width:60px;height:60px;border-radius:8px;object-fit:cover}
+/* CONTACT */
+.contact-box{max-width:400px;margin:auto;background:#fff;padding:20px;border-radius:10px;display:flex;flex-direction:column;gap:10px}
+.contact-box input,.contact-box textarea{padding:10px;border:1px solid #ccc;border-radius:6px}
 
-/* CHAT */
-.chat-box{position:fixed;bottom:20px;right:20px;width:320px;background:#fff;border-radius:10px;display:none;border:1px solid #ddd;z-index:1500}
-.chat-box button{
- margin:4px;
- padding:6px 10px;
- border:1px solid #c8a97e;
- background:#fff;
- color:#c8a97e;
- cursor:pointer;
- border-radius:5px;
- transition:.3s
-}
+/* CHAT PREMIUM */
+.chat-box{position:fixed;bottom:20px;right:20px;width:340px;background:#fff;border-radius:16px;display:none;border:1px solid #ddd;z-index:1500;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+.chat-header{background:#c8a97e;color:#fff;padding:12px;display:flex;justify-content:space-between}
+.chat-body{padding:15px;font-size:14px}
+.chat-options{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chat-chip{padding:6px 12px;border:1px solid #c8a97e;border-radius:20px;cursor:pointer}
+.chat-chip:hover{background:#c8a97e;color:#fff}
+.chat-actions{display:flex;gap:8px;padding:10px}
+.chat-actions input{flex:1;padding:6px}
 
-/* ACTIVE / SELECTED BUTTON */
-.chat-box button.active{
- background:#c8a97e;
- color:#fff;
-}
-
-/* HOVER REVERSE EFFECT */
-.chat-box button:hover{
- background:#c8a97e;
- color:#fff;
-}
-
-/* IF ACTIVE THEN HOVER REVERSE BACK */
-.chat-box button.active:hover{
- background:#fff;
- color:#c8a97e;
-}
-.chat-box button:hover{
- background:#c8a97e;
- color:#fff;
-}
-.chat-box button:hover{background:#c8a97e;color:#fff}
-
-/* GALLERY */
-.gallery img{width:100%;border-radius:10px;transition:.3s}
-.gallery img:hover{transform:scale(1.05)}
-
+.login-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;justify-content:center;align-items:center}
+.login-box{background:#fff;padding:20px;border-radius:10px}
 </style>
 </head>
 <body>
 
 <header>
-<h1>ELITE SALON</h1>
-<div class="menu-toggle" id="menuToggle">☰</div>
-<nav id="navMenu">
+<h2>ELITE SALON</h2>
+<nav>
 <a href="#home">Home</a>
 <a href="#services">Services</a>
 <a href="#gallery">Gallery</a>
-<a href="#pricing">Pricing</a>
-<a href="#membership">Membership</a>
+<a href="#reviews">Reviews</a>
 <a href="#contact">Contact</a>
 <a href="#" onclick="openLogin()">Login</a>
 </nav>
 </header>
 
 <section id="home">
-<h2>Welcome to Elite Salon</h2>
 <div class="carousel">
 <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9')"></div>
 <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438')"></div>
@@ -133,215 +74,105 @@ section h2{text-align:center;margin-bottom:25px}
 </section>
 
 <section id="services">
-<h2>Select Gender</h2>
-<div class="gender-select">
-<button class="gender-btn" id="menBtn">Men</button>
-<button class="gender-btn" id="womenBtn">Women</button>
+<h2>Services</h2>
+<div style="text-align:center;margin-bottom:15px">
+<button class="btn" onclick="loadServices('Men')">Men</button>
+<button class="btn" onclick="loadServices('Women')">Women</button>
 </div>
-<div class="grid" id="categoryGrid"></div>
+<div id="serviceList" class="grid"></div>
 </section>
 
 <section id="gallery">
 <h2>Gallery</h2>
-<div class="grid gallery">
+<div class="grid">
 <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1">
 <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f">
 <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e">
-<img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e">
-<img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2">
-<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
 </div>
 </section>
 
-<section id="pricing">
-<h2>Pricing</h2>
+<section id="reviews">
+<h2>Customer Reviews</h2>
 <div class="grid">
-<div class="card"><p>Haircut ₹300</p></div>
-<div class="card"><p>Facial ₹800</p></div>
-</div>
-</section>
-
-<section id="membership">
-<h2>Membership</h2>
-<div class="grid">
-<div class="card"><p>Silver ₹999</p></div>
-<div class="card"><p>Gold ₹1999</p></div>
+<div class="review-card"><p>“Amazing bridal makeup!”</p><div class="stars">★★★★★</div><small>- Priya</small></div>
+<div class="review-card"><p>“Best haircut in town.”</p><div class="stars">★★★★☆</div><small>- Rahul</small></div>
+<div class="review-card"><p>“Loved pre-wedding package.”</p><div class="stars">★★★★★</div><small>- Ankit</small></div>
 </div>
 </section>
 
 <section id="contact">
-<h2>Contact</h2>
-<p style="text-align:center">Phone: +91 XXXXX XXXXX</p>
+<h2>Contact Us</h2>
+<div class="contact-box">
+<input placeholder="Name">
+<input placeholder="Email">
+<textarea placeholder="Message"></textarea>
+<button class="btn">Send</button>
+</div>
 </section>
 
-<div class="service-modal" id="serviceModal">
-<div class="service-box" id="serviceList"></div>
+<div class="login-modal" id="loginModal">
+<div class="login-box">
+<input id="username" placeholder="Enter name">
+<button onclick="loginUser()">Login</button>
+</div>
 </div>
 
 <div class="chat-box" id="chatBox">
-<div style="background:#c8a97e;color:#fff;padding:10px;display:flex;justify-content:space-between;align-items:center">
-<span>Booking</span>
-<span style="cursor:pointer;font-weight:bold" onclick="document.getElementById('chatBox').style.display='none'">✖</span>
-</div>
-<div id="chatBody" style="padding:10px;height:180px;overflow:auto"></div>
-<div style="display:flex">
-<input type="date" id="dateInput" style="flex:1;padding:8px">
-<button id="confirmBtn" class="btn">OK</button>
-</div>
-</div>
-
-<div id="loginModal" style="position:fixed;top:0;left:0;width:100%;height:100%;display:none;justify-content:center;align-items:center;background:rgba(0,0,0,.5);z-index:2000">
-<div style="background:#fff;padding:35px 20px 20px;border-radius:10px;position:relative;display:flex;flex-direction:column;gap:10px">
-<span style="position:absolute;top:8px;right:12px;cursor:pointer;font-weight:bold;font-size:18px" onclick="document.getElementById('loginModal').style.display='none'">✖</span>
-<input id="username" placeholder="Enter Name" style="padding:8px;border:1px solid #ccc;border-radius:5px">
-<button id="loginBtn" class="btn">Login</button>
+<div class="chat-header"><span>Book Appointment</span><span onclick="toggleChat()">✖</span></div>
+<div id="chatBody" class="chat-body"></div>
+<div class="chat-actions">
+<input type="date" id="dateInput">
+<button onclick="confirmBooking()">OK</button>
 </div>
 </div>
 
 <script>
-// NAV HIDE ON SCROLL
-let lastScroll=0;
-window.addEventListener('scroll',()=>{
- let current=window.pageYOffset;
- let header=document.querySelector('header');
-
- if(current>lastScroll && current>50){
-  header.classList.add('hide');
- }else{
-  header.classList.remove('hide');
- }
-
- lastScroll=current;
-});
-
-// SCROLL ANIMATION
-const sections=document.querySelectorAll('section');
-window.addEventListener('scroll',()=>{
- sections.forEach(sec=>{
-  const top=sec.getBoundingClientRect().top;
-  if(top<window.innerHeight-100){sec.classList.add('show')}
- });
-});
-
-// CAROUSEL
+// carousel
 let slides=document.querySelectorAll('.slide');
-let index=0;
+let i=0;
 setInterval(()=>{
- slides[index].classList.remove('active');
- index=(index+1)%slides.length;
- slides[index].classList.add('active');
+ slides[i].classList.remove('active');
+ i=(i+1)%slides.length;
+ slides[i].classList.add('active');
 },3000);
 
-let gender='';
 let currentUser=localStorage.getItem('user');
 let selectedService='';
-let bookingDone=false;
 
-const services={
- Men:{
-  "Hair Services":[
-    {name:"Haircut",price:"₹300",duration:"30 min",desc:"Precision haircut tailored to your style."},
-    {name:"Hair Wash",price:"₹150",duration:"15 min",desc:"Deep cleansing with premium shampoo."},
-    {name:"Hair Styling",price:"₹250",duration:"25 min",desc:"Stylish finish for any occasion."}
-  ],
-  "Grooming":[
-    {name:"Beard Trim",price:"₹200",duration:"20 min",desc:"Sharp beard shaping & detailing."},
-    {name:"Clean Shave",price:"₹180",duration:"20 min",desc:"Smooth shave with skin care."}
-  ]
- },
- Women:{
-  "Hair Services":[
-    {name:"Haircut",price:"₹500",duration:"45 min",desc:"Professional haircut with styling."},
-    {name:"Blow Dry",price:"₹400",duration:"30 min",desc:"Smooth blow dry for perfect finish."}
-  ],
-  "Beauty":[
-    {name:"Facial",price:"₹800",duration:"60 min",desc:"Relaxing facial for glowing skin."},
-    {name:"Cleanup",price:"₹600",duration:"40 min",desc:"Deep skin cleansing treatment."}
-  ]
- }
+// INDIAN SERVICES
+const serviceData={
+ Men:[
+  {name:'Haircut',price:'₹300',time:'30 min',desc:'Classic haircut'},
+  {name:'Beard Trim',price:'₹200',time:'20 min',desc:'Beard styling'},
+  {name:'Groom Package',price:'₹999',time:'60 min',desc:'Haircut + Beard + Facial'},
+  {name:'Pre-Wedding Groom',price:'₹1999',time:'90 min',desc:'Full grooming before wedding'}
+ ],
+ Women:[
+  {name:'Haircut',price:'₹500',time:'40 min',desc:'Stylish haircut'},
+  {name:'Facial',price:'₹700',time:'50 min',desc:'Glow facial'},
+  {name:'Bridal Makeup',price:'₹5000',time:'120 min',desc:'HD bridal makeup'},
+  {name:'Pre-Bridal Package',price:'₹7999',time:'180 min',desc:'Complete wedding prep'}
+ ]
 };
 
-const categoryImages={
- "Hair Services":"https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
- "Grooming":"https://images.unsplash.com/photo-1522337360788-8b13dee7a37e",
- "Beauty":"https://images.unsplash.com/photo-1503951914875-452162b0f3f1"
-};
-
-// MENU TOGGLE
-document.getElementById('menuToggle').onclick=()=>{
- const nav=document.getElementById('navMenu');
- nav.classList.toggle('active');
-};
-
-// CLOSE MENU ON LINK CLICK
-document.querySelectorAll('#navMenu a').forEach(link=>{
- link.addEventListener('click',()=>{
-  document.getElementById('navMenu').classList.remove('active');
+function loadServices(g){
+ let container=document.getElementById('serviceList');
+ container.innerHTML='';
+ serviceData[g].forEach(s=>{
+  let card=document.createElement('div');
+  card.className='card';
+  card.innerHTML=`<img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438"><div class="card-content"><h4>${s.name}</h4><p>${s.desc}</p><p><b>${s.price}</b> • ${s.time}</p><button class="btn" onclick="bookService('${s.name}')">Book</button></div>`;
+  container.appendChild(card);
  });
-});
-
-// EVENTS
-document.getElementById('menBtn').onclick=()=>selectGender('Men');
-document.getElementById('womenBtn').onclick=()=>selectGender('Women');
-document.getElementById('loginBtn').onclick=loginUser;
-document.getElementById('confirmBtn').onclick=confirmBooking;
-
-function selectGender(g){
- gender=g;
- document.querySelectorAll('.gender-btn').forEach(b=>b.classList.remove('active'));
- document.getElementById(g==='Men'?'menBtn':'womenBtn').classList.add('active');
- loadCategories();
 }
 
-function loadCategories(){
- const grid=document.getElementById('categoryGrid');
- grid.innerHTML='';
- for(let cat in services[gender]){
-  let div=document.createElement('div');
-  div.className='card';
-  div.innerHTML=`<img src="${categoryImages[cat]}"><p>${cat}</p>`;
-  div.onclick=()=>openCategory(cat);
-  grid.appendChild(div);
- }
-}
-
-function openCategory(cat){
- const list=document.getElementById('serviceList');
- list.innerHTML='';
-
- const close=document.createElement('span');
- close.className='close-btn';
- close.innerText='✖';
- close.onclick=()=>document.getElementById('serviceModal').style.display='none';
- list.appendChild(close);
-
- services[gender][cat].forEach(s=>{
-  let div=document.createElement('div');
-  div.className='service-item';
-
-  div.innerHTML=`
-    <img src="${categoryImages[cat]}">
-    <div>
-      <b>${s.name}</b><br>
-      <small>${s.desc}</small><br>
-      <span><b>${s.price}</b> • ${s.duration}</span>
-    </div>
-  `;
-
-  let btn=document.createElement('button');
-  btn.innerText='Book';
-  btn.className='btn';
-  btn.onclick=()=>bookService(s.name);
-
-  div.appendChild(btn);
-  list.appendChild(div);
-});
-
- document.getElementById('serviceModal').style.display='flex';
+function bookService(s){
+ if(!currentUser){openLogin();return}
+ toggleChat();
+ selectService(s);
 }
 
 function openLogin(){document.getElementById('loginModal').style.display='flex'}
-
 function loginUser(){
  let name=document.getElementById('username').value;
  if(!name)return alert('Enter name');
@@ -350,82 +181,76 @@ function loginUser(){
  document.getElementById('loginModal').style.display='none';
 }
 
-function bookService(service){
+function toggleChat(){
  if(!currentUser){openLogin();return}
- selectedService=service;
- bookingDone=false;
- document.getElementById('dateInput').value='';
- document.getElementById('chatBox').style.display='block';
- document.getElementById('chatBody').innerHTML=
-  'Hello '+currentUser+'<br>Service: '+service+'<br><b>Select date below</b>';
+ let box=document.getElementById('chatBox');
+ box.style.display=box.style.display==='block'?'none':'block';
+ startChat();
+}
+
+function startChat(){
+ let chat=document.getElementById('chatBody');
+ chat.innerHTML='<b>Select Gender</b>';
+ let div=document.createElement('div');
+ div.className='chat-options';
+ ['Men','Women'].forEach(g=>{
+  let chip=document.createElement('div');
+  chip.className='chat-chip';
+  chip.innerText=g;
+  chip.onclick=()=>showServicesChat(g);
+  div.appendChild(chip);
+ });
+ chat.appendChild(div);
+}
+
+function showServicesChat(g){
+ let chat=document.getElementById('chatBody');
+ chat.innerHTML='<b>Select Service</b>';
+ let div=document.createElement('div');
+ div.className='chat-options';
+ serviceData[g].forEach(s=>{
+  let chip=document.createElement('div');
+  chip.className='chat-chip';
+  chip.innerText=s.name;
+  chip.onclick=()=>selectService(s.name);
+  div.appendChild(chip);
+ });
+ chat.appendChild(div);
+}
+
+function selectService(s){
+ selectedService=s;
+ document.getElementById('chatBody').innerHTML=`Hello ${currentUser}<br><b>${s}</b><br>Select date below`;
 }
 
 function confirmBooking(){
- if(bookingDone)return;
  let date=document.getElementById('dateInput').value;
- if(!date)return alert('Select date');
- bookingDone=true;
-
- const chat=document.getElementById('chatBody');
- chat.innerHTML+=`<br>Booked on ${date}<br><br>Book another?<br>`;
+ if(!selectedService||!date)return alert('Select all');
+ let chat=document.getElementById('chatBody');
+ chat.innerHTML=`✅ ${selectedService} booked on ${date}<br><br>Book another?`;
 
  let yes=document.createElement('button');
- yes.innerText='Yes';
- yes.className='btn';
- yes.onclick=startNewBooking;
-
+ yes.innerText='Yes'; yes.className='btn'; yes.onclick=startChat;
  let no=document.createElement('button');
- no.innerText='No';
- no.className='btn';
- no.onclick=()=>document.getElementById('chatBox').style.display='none';
+ no.innerText='No'; no.className='btn'; no.onclick=toggleChat;
 
  chat.appendChild(yes);
  chat.appendChild(no);
 }
 
-function startNewBooking(){
- selectedService='';
- bookingDone=false;
- gender='';
- document.getElementById('chatBody').innerHTML='Select Gender:<br>';
-
- let men=document.createElement('button');
- men.innerText='Men';
- men.className='btn';
- men.onclick=()=>{selectGender('Men');chatSuggest();};
-
- let women=document.createElement('button');
- women.innerText='Women';
- women.className='btn';
- women.onclick=()=>{selectGender('Women');chatSuggest();};
-
- document.getElementById('chatBody').appendChild(men);
- document.getElementById('chatBody').appendChild(women);
-}
-
-function toggleChat(){
- if(!currentUser){openLogin();return}
- let box=document.getElementById('chatBox');
- box.style.display = box.style.display==='block' ? 'none' : 'block';
- if(!selectedService){startNewBooking();}
-}
-
-function chatSuggest(){
- const chat=document.getElementById('chatBody');
- chat.innerHTML='Select Service:<br>';
- for(let cat in services[gender]){
-  services[gender][cat].forEach(s=>{
-   let btn=document.createElement('button');
-   btn.innerText=s.name;
-   btn.className='btn';
-   btn.onclick=()=>bookService(s);
-   chat.appendChild(btn);
-  });
- }
-}
+let btn=document.createElement('div');
+btn.innerHTML='💬 Book';
+btn.style.position='fixed';
+btn.style.bottom='20px';
+btn.style.right='20px';
+btn.style.background='#c8a97e';
+btn.style.color='#fff';
+btn.style.padding='10px 15px';
+btn.style.borderRadius='20px';
+btn.style.cursor='pointer';
+btn.onclick=toggleChat;
+document.body.appendChild(btn);
 </script>
-
-<div onclick="toggleChat()" style="position:fixed;bottom:20px;right:20px;background:#c8a97e;color:#fff;padding:12px 16px;border-radius:30px;cursor:pointer">💬 Book</div>
 
 </body>
 </html>
