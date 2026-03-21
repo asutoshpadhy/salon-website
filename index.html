@@ -56,8 +56,16 @@ section h2{text-align:center;margin-bottom:25px}
 .chat-actions{display:flex;gap:8px;padding:10px}
 .chat-actions input{flex:1;padding:6px}
 
-.login-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;justify-content:center;align-items:center}
-.login-box{background:#fff;padding:20px;border-radius:10px}
+.login-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;justify-content:center;align-items:center;z-index:2000}
+.login-box{background:#fffaf3;padding:25px;border-radius:14px;min-width:300px;display:flex;flex-direction:column;gap:12px;position:relative;border:1px solid #e6dccf;box-shadow:0 15px 40px rgba(0,0,0,0.2)}
+.login-box input{padding:10px;border:1px solid #e6dccf;border-radius:8px;width:100%}
+.login-box .btn{width:100%;padding:10px;border-radius:25px}
+.close-login{position:absolute;top:-14px;right:-14px;width:30px;height:30px;background:#c8a97e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;box-shadow:0 6px 14px rgba(0,0,0,0.25);z-index:10}
+
+/* CARD CLOSE BUTTON */
+.card{position:relative}
+.card-close{position:absolute;top:8px;right:8px;width:24px;height:24px;background:#c8a97e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;opacity:0;transition:.3s}
+.card:hover .card-close{opacity:1}
 </style>
 </head>
 <body>
@@ -126,8 +134,9 @@ section h2{text-align:center;margin-bottom:25px}
 
 <div class="login-modal" id="loginModal">
 <div class="login-box">
-<input id="username" placeholder="Enter name">
-<button onclick="loginUser()">Login</button>
+<span class="close-login" onclick="closeLogin()">✖</span>
+<input id="username" placeholder="Enter your name">
+<button class="btn" onclick="loginUser()">Login</button>
 </div>
 </div>
 
@@ -149,6 +158,11 @@ function toggleMenu(){
 // carousel + text sync
 let slides=document.querySelectorAll('.slide');
 let heroText=document.getElementById('heroText');
+let heroTexts=[
+ 'Look Good. Feel Better.',
+ 'Premium Bridal & Grooming',
+ 'Style That Defines You'
+];
 let i=0;
 setInterval(()=>{
  slides[i].classList.remove('active');
@@ -157,6 +171,8 @@ setInterval(()=>{
  i=(i+1)%slides.length;
 
  slides[i].classList.add('active');
+ heroText.innerHTML=`<h1>${heroTexts[i]}</h1>`;
+
  setTimeout(()=>heroText.classList.add('active'),200);
 },3000);
 
@@ -184,7 +200,16 @@ function loadServices(g){
  serviceData[g].forEach(s=>{
   let card=document.createElement('div');
   card.className='card';
-  card.innerHTML=`<img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438"><div class="card-content"><h4>${s.name}</h4><p>${s.desc}</p><p><b>${s.price}</b> • ${s.time}</p><button class="btn" onclick="bookService('${s.name}')">Book</button></div>`;
+  card.innerHTML=`
+  <span class="card-close" onclick="this.parentElement.remove()">✖</span>
+  <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438">
+  <div class="card-content">
+    <h4>${s.name}</h4>
+    <p>${s.desc}</p>
+    <p><b>${s.price}</b> • ${s.time}</p>
+    <button class="btn" onclick="bookService('${s.name}')">Book</button>
+  </div>
+`;
   container.appendChild(card);
  });
 }
@@ -196,6 +221,7 @@ function bookService(s){
 }
 
 function openLogin(){document.getElementById('loginModal').style.display='flex'}
+function closeLogin(){document.getElementById('loginModal').style.display='none'}
 function loginUser(){
  let name=document.getElementById('username').value;
  if(!name)return alert('Enter name');
