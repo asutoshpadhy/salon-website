@@ -9,16 +9,28 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
 body{background:#f4efe6;color:#2b2b2b}
 
+/* NAV */
 header{display:flex;justify-content:space-between;align-items:center;padding:18px 30px;background:#fffaf3;position:fixed;top:0;width:100%;border-bottom:1px solid #e6dccf;z-index:1000}
 nav{display:flex;gap:20px}
 nav a{text-decoration:none;color:#2b2b2b;font-weight:500}
+.menu-toggle{display:none;font-size:24px;cursor:pointer}
+
+@media(max-width:768px){
+ nav{position:absolute;top:70px;left:0;width:100%;background:#fffaf3;flex-direction:column;display:none;padding:10px}
+ nav.active{display:flex}
+ .menu-toggle{display:block}
+}
 
 section{padding:100px 30px 60px}
 section h2{text-align:center;margin-bottom:25px}
 
+/* HERO */
 .carousel{position:relative;height:70vh;overflow:hidden}
 .slide{position:absolute;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:1s}
 .slide.active{opacity:1}
+.hero-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;text-align:center;opacity:0;transition:1s}
+.hero-text.active{opacity:1}
+.hero-text h1{font-size:40px;background:rgba(0,0,0,0.4);padding:10px 20px;border-radius:10px}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
 .card{background:#fff;border-radius:16px;border:1px solid #e6dccf;overflow:hidden}
@@ -29,15 +41,12 @@ section h2{text-align:center;margin-bottom:25px}
 
 .btn{background:#c8a97e;color:#fff;border:none;padding:8px 14px;border-radius:20px;cursor:pointer}
 
-/* REVIEWS */
 .review-card{background:#fff;padding:20px;border-radius:12px;border:1px solid #e6dccf;text-align:center}
 .stars{color:#c8a97e;font-size:18px;margin:10px 0}
 
-/* CONTACT */
 .contact-box{max-width:400px;margin:auto;background:#fff;padding:20px;border-radius:10px;display:flex;flex-direction:column;gap:10px}
 .contact-box input,.contact-box textarea{padding:10px;border:1px solid #ccc;border-radius:6px}
 
-/* CHAT PREMIUM */
 .chat-box{position:fixed;bottom:20px;right:20px;width:340px;background:#fff;border-radius:16px;display:none;border:1px solid #ddd;z-index:1500;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
 .chat-header{background:#c8a97e;color:#fff;padding:12px;display:flex;justify-content:space-between}
 .chat-body{padding:15px;font-size:14px}
@@ -55,7 +64,8 @@ section h2{text-align:center;margin-bottom:25px}
 
 <header>
 <h2>ELITE SALON</h2>
-<nav>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<nav id="navMenu">
 <a href="#home">Home</a>
 <a href="#services">Services</a>
 <a href="#gallery">Gallery</a>
@@ -70,6 +80,10 @@ section h2{text-align:center;margin-bottom:25px}
 <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9')"></div>
 <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438')"></div>
 <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1556228720-195a672e8a03')"></div>
+
+<div class="hero-text active" id="heroText">
+<h1>Look Good. Feel Better.</h1>
+</div>
 </div>
 </section>
 
@@ -127,19 +141,28 @@ section h2{text-align:center;margin-bottom:25px}
 </div>
 
 <script>
-// carousel
+// NAV MOBILE
+function toggleMenu(){
+ document.getElementById('navMenu').classList.toggle('active');
+}
+
+// carousel + text sync
 let slides=document.querySelectorAll('.slide');
+let heroText=document.getElementById('heroText');
 let i=0;
 setInterval(()=>{
  slides[i].classList.remove('active');
+ heroText.classList.remove('active');
+
  i=(i+1)%slides.length;
+
  slides[i].classList.add('active');
+ setTimeout(()=>heroText.classList.add('active'),200);
 },3000);
 
 let currentUser=localStorage.getItem('user');
 let selectedService='';
 
-// INDIAN SERVICES
 const serviceData={
  Men:[
   {name:'Haircut',price:'₹300',time:'30 min',desc:'Classic haircut'},
